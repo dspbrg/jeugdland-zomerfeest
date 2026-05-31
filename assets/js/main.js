@@ -119,10 +119,10 @@
     var diamonds = [].slice.call(document.querySelectorAll(".hd"));
     for (var d = 0; d < diamonds.length; d++) {
       var name = variants[Math.floor(Math.random() * variants.length)];
-      var dur = 0.7 + Math.random() * 0.9;        // 0.7s – 1.6s — bar-bounce tempo
-      var delay = -Math.random() * dur * 2;        // random point in the ping-pong
+      var dur = 2.3 + Math.random() * 1.7;        // 2.3s – 4.0s — playful dance tempo
+      var delay = -Math.random() * dur;           // random point in the sequence
       diamonds[d].style.animation =
-        name + " " + dur.toFixed(2) + "s " + ease + " " + delay.toFixed(2) + "s infinite alternate";
+        name + " " + dur.toFixed(2) + "s " + ease + " " + delay.toFixed(2) + "s infinite";
     }
   }
 

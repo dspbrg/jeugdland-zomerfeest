@@ -108,6 +108,8 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    ========================================================= */
 .hero {
   position: relative;
+  z-index: 0; /* own stacking context: diamonds that bleed past the bottom
+                 stay below the line-up layer (z-index:1) → behind its text */
   text-align: center;
   background: transparent; /* lets the shell's color-fade show through */
   padding-top: clamp(32px, 9vw, 56px);
@@ -136,25 +138,67 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    together. Variety lives BETWEEN diamonds (different float-* variant +
    duration + delay), never within one — so nothing looks disjointed.
    Each keyframe rest-holds the first ~third, then floats out and eases home. */
-.hd-1 { top: 4%;    left: -5%;  rotate: -14deg; animation: float-c 1.10s cubic-bezier(.2,.9,.3,1) -0.20s infinite alternate; }
-.hd-2 { top: 30%;   right: -6%; rotate: 12deg;  width: 26%; animation: float-b 0.86s cubic-bezier(.2,.9,.3,1) -0.40s infinite alternate; }
-.hd-3 { top: 52%;   left: -7%;  rotate: 8deg;   width: 28%; animation: float-a 1.28s cubic-bezier(.2,.9,.3,1) -0.70s infinite alternate; }
-.hd-4 { bottom: 16%; right: -4%; rotate: -10deg; animation: float-d 0.98s cubic-bezier(.2,.9,.3,1) -0.30s infinite alternate; }
-.hd-5 { bottom: 2%;  left: 4%;  rotate: 16deg;  width: 16%; opacity: .8; animation: float-e 1.16s cubic-bezier(.2,.9,.3,1) -0.55s infinite alternate; }
+.hd-1 { top: 4%;    left: -5%;  rotate: -14deg; animation: float-c 3.0s cubic-bezier(.2,.9,.3,1) -0.4s infinite; }
+.hd-2 { top: 30%;   right: -6%; rotate: 12deg;  width: 26%; animation: float-b 2.6s cubic-bezier(.2,.9,.3,1) -1.3s infinite; }
+.hd-3 { top: 52%;   left: -7%;  rotate: 8deg;   width: 28%; animation: float-a 3.4s cubic-bezier(.2,.9,.3,1) -2.1s infinite; }
+.hd-4 { bottom: 16%; right: -4%; rotate: -10deg; animation: float-d 2.8s cubic-bezier(.2,.9,.3,1) -0.9s infinite; }
+.hd-5 { bottom: 2%;  left: 4%;  rotate: 16deg;  width: 16%; opacity: .8; animation: float-e 3.2s cubic-bezier(.2,.9,.3,1) -1.7s infinite; }
 
 /* badge: gentle scale-only pulse (no rotation, so nothing to sync) */
 @keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.10; } }
 
-/* Ping-pong "EQ bar" bounce: each diamond pumps between rest and a punched
-   state. Used with animation-direction: alternate, so it bounces rest⇄hit
-   forever (no reset jump). Scale + tilt move as one. Random duration/phase
-   per diamond ⇒ they sit at different "heights", like equalizer bars. */
-@keyframes float-a { from { scale: 1; transform: rotate(0deg); } to { scale: 1.24; transform: rotate(8deg);  } }
-@keyframes float-b { from { scale: 1; transform: rotate(0deg); } to { scale: 1.32; transform: rotate(-9deg); } }
-@keyframes float-c { from { scale: 1; transform: rotate(0deg); } to { scale: 1.18; transform: rotate(5deg);  } }
-@keyframes float-d { from { scale: 1; transform: rotate(0deg); } to { scale: 1.28; transform: rotate(-6deg); } }
-@keyframes float-e { from { scale: 1; transform: rotate(0deg); } to { scale: 1.20; transform: rotate(11deg); } }
-@keyframes float-f { from { scale: 1; transform: rotate(0deg); } to { scale: 1.34; transform: rotate(-4deg); } }
+/* Playful, never-the-same bounce: each variant is a little dance of varied
+   hits — different height (scale), tilt and direction every beat — so no two
+   bounces look alike. Scale + tilt move as one. Random variant/tempo/phase
+   per diamond on top (JS) keeps them all out of sync. */
+@keyframes float-a {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  14% { scale: 1.30; transform: rotate(10deg); }
+  30% { scale: 1.06; transform: rotate(-3deg); }
+  46% { scale: 1.34; transform: rotate(-9deg); }
+  63% { scale: 1.12; transform: rotate(5deg); }
+  80% { scale: 1;    transform: rotate(0deg); }
+}
+@keyframes float-b {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  12% { scale: 1.18; transform: rotate(-8deg); }
+  27% { scale: 1.32; transform: rotate(6deg); }
+  44% { scale: 1.08; transform: rotate(-2deg); }
+  60% { scale: 1.26; transform: rotate(13deg); }
+  78% { scale: 1;    transform: rotate(0deg); }
+}
+@keyframes float-c {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  16% { scale: 1.24; transform: rotate(7deg); }
+  33% { scale: 1.02; transform: rotate(0deg); }
+  50% { scale: 1.34; transform: rotate(-7deg); }
+  68% { scale: 1.10; transform: rotate(3deg); }
+  85% { scale: 1;    transform: rotate(0deg); }
+}
+@keyframes float-d {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  10% { scale: 1.28; transform: rotate(-10deg); }
+  24% { scale: 1.04; transform: rotate(2deg); }
+  40% { scale: 1.16; transform: rotate(9deg); }
+  56% { scale: 1.30; transform: rotate(-5deg); }
+  74% { scale: 1;    transform: rotate(0deg); }
+}
+@keyframes float-e {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  13% { scale: 1.20; transform: rotate(6deg); }
+  26% { scale: 1.34; transform: rotate(-8deg); }
+  42% { scale: 1.06; transform: rotate(3deg); }
+  58% { scale: 1.22; transform: rotate(11deg); }
+  75% { scale: 1;    transform: rotate(0deg); }
+}
+@keyframes float-f {
+  0%, 100% { scale: 1;    transform: rotate(0deg); }
+  15% { scale: 1.32; transform: rotate(-6deg); }
+  32% { scale: 1.10; transform: rotate(4deg); }
+  49% { scale: 1.26; transform: rotate(-11deg); }
+  66% { scale: 1.04; transform: rotate(2deg); }
+  82% { scale: 1;    transform: rotate(0deg); }
+}
 
 .hero__logo {
   width: min(72%, 300px);
@@ -267,7 +311,9 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 /* =========================================================
    LINE-UP
    ========================================================= */
-.lineup { text-align: center; background: transparent; }
+/* sits above the hero diamonds that drift across the boundary, so they
+   show through the (transparent) background but stay BEHIND the typography */
+.lineup { text-align: center; background: transparent; position: relative; z-index: 1; }
 .lineup__list {
   list-style: none;
   margin: clamp(20px, 7vw, 34px) 0 0;
