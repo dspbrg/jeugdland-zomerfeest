@@ -34,6 +34,16 @@
   --shell-max: 480px;        /* phone-width canvas, centered on desktop */
   --pad: clamp(20px, 6vw, 32px);
   --radius: 22px;
+
+  /* spacing scale — 4px base, mobile-min → 480px-max. Every vertical gap
+     references one of these so the rhythm stays consistent. */
+  --space-1: 4px;                        /* hairline */
+  --space-2: 8px;                        /* tight    */
+  --space-3: clamp(12px, 3.5vw, 16px);   /* gap between sibling cards/grids */
+  --space-4: clamp(16px, 5vw, 24px);     /* element → element within a block */
+  --space-5: clamp(24px, 7vw, 36px);     /* sub-section gap inside a block  */
+  --space-6: clamp(40px, 11vw, 64px);    /* outer section padding */
+  --pad-card: clamp(20px, 6vw, 28px);    /* uniform card inner padding */
 }
 
 * { box-sizing: border-box; }
@@ -77,7 +87,7 @@ img { display: block; max-width: 100%; }
   80%       { background-color: #FDEEE8; } /* soft coral  */
 }
 
-section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
+section, header, footer { padding: var(--space-6) var(--pad); }
 
 /* ---------- shared bits ---------- */
 .section-eyebrow {
@@ -88,7 +98,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   letter-spacing: .04em;
   font-size: clamp(15px, 4.5vw, 19px);
   color: var(--royal);
-  margin: 0 0 18px;
+  margin: 0 0 var(--space-4);
 }
 .section-eyebrow--center { text-align: center; }
 
@@ -98,7 +108,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   text-transform: uppercase;
   letter-spacing: .03em;
   font-size: clamp(15px, 4.6vw, 20px);
-  padding: 8px 16px;
+  padding: var(--space-2) var(--space-4);
   border-radius: 10px;
 }
 .pill--ink { background: var(--ink); color: #fff; }
@@ -202,7 +212,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
 .hero__logo {
   width: min(66%, 270px);
-  margin: 0 auto clamp(8px, 2.5vw, 14px);
+  margin: 0 auto var(--space-4);
 }
 .hero__tagline {
   font-weight: 700;
@@ -211,13 +221,13 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   letter-spacing: .01em;
   font-size: clamp(15px, 4.6vw, 19px);
   color: var(--ink);
-  margin: 0 auto clamp(22px, 6.5vw, 36px); /* more air above ZOMERFEEST */
+  margin: 0 auto var(--space-5); /* air above ZOMERFEEST */
   max-width: 34ch;
 }
 
 .hero__title {
   position: relative;
-  margin-bottom: clamp(10px, 3.5vw, 18px);
+  margin-bottom: var(--space-4);
   will-change: translate;
 }
 .hero__zomerfeest { width: 100%; height: auto; } /* scale proportionally */
@@ -225,7 +235,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    touch onto the artwork at its bottom edge */
 .hero__badge {
   position: absolute;
-  top: -8%;          /* high, like the poster — body above the word */
+  top: -15%;         /* high, like the poster — body above the word */
   right: -6%;        /* tucked to the top-right, just past the edge */
   width: 28%;        /* poster ratio (≈28% of the title) */
   max-width: 122px;
@@ -258,8 +268,8 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   color: #fff;
   text-align: center;
   border-radius: var(--radius);
-  padding: clamp(20px, 6vw, 30px) clamp(14px, 4vw, 22px);
-  margin-top: clamp(32px, 8vw, 46px); /* tighter gap between time block and counter */
+  padding: var(--pad-card) clamp(14px, 4vw, 22px);
+  margin-top: var(--space-5); /* gap between time block and counter */
   box-shadow: 0 12px 28px rgba(49, 31, 92, .25);
 }
 .countdown__title {
@@ -270,19 +280,19 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   letter-spacing: .04em;
   font-size: clamp(14px, 4.2vw, 18px);
   color: var(--yellow);
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
 }
 .countdown__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(8px, 3vw, 14px);
+  gap: var(--space-3);
   max-width: 380px;
   margin: 0 auto;
 }
 .cd-cell {
   background: rgba(255, 255, 255, .12);
   border-radius: 16px;
-  padding: clamp(12px, 4vw, 18px) 4px;
+  padding: var(--space-4) var(--space-1);
 }
 .cd-num {
   display: block;
@@ -295,7 +305,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 .cd-lbl {
   display: block;
-  margin-top: 6px;
+  margin-top: var(--space-2);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -317,10 +327,10 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 .lineup { text-align: center; background: transparent; position: relative; z-index: 1; padding-inline: 16px; }
 .lineup__list {
   list-style: none;
-  margin: clamp(20px, 7vw, 34px) 0 0;
+  margin: var(--space-5) 0 0;
   padding: 0;
   display: grid;
-  gap: clamp(10px, 3vw, 16px);
+  gap: var(--space-3);
 }
 /* original poster word-art (SVG) for the artist names — like Figma 11:95 */
 .artist-art { margin: 0 auto; }
@@ -334,25 +344,52 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 .acts { background: transparent; }
 .acts__grid {
   display: grid;
-  gap: clamp(14px, 4vw, 18px);
+  gap: var(--space-3);
 }
 .act {
   border-radius: var(--radius);
-  padding: clamp(20px, 6vw, 28px);
+  padding: var(--pad-card);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
   align-items: flex-start;
   color: var(--ink);
+  /* tactile lift on hover/tap — cards no longer feel inert */
+  box-shadow: 0 4px 14px rgba(49, 31, 92, .06);
+  transition: transform .25s cubic-bezier(.2,.9,.3,1),
+              box-shadow .25s cubic-bezier(.2,.9,.3,1);
+}
+.act:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(49, 31, 92, .14); }
+.act:active {
+  transform: translateY(-1px) scale(.99);
+  box-shadow: 0 6px 16px rgba(49, 31, 92, .12);
+  transition-duration: .08s;
 }
 .act__title {
+  position: relative;
   margin: 0;
+  padding-left: 26px; /* room for the diamond bullet */
   font-family: var(--font-display); /* Block Berthold — matches the poster */
   font-weight: 700;
   line-height: 1;
   font-size: clamp(30px, 9vw, 42px);
   letter-spacing: .5px;
+  transition: transform .25s cubic-bezier(.2,.9,.3,1);
 }
+/* little faceted diamond before each title, in the card's own colour */
+.act__title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .42em;
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  box-shadow: inset -2px -2px 0 rgba(255, 255, 255, .45);
+}
+.act:hover .act__title { transform: translateX(3px); }
 .act p {
   margin: 0;
   font-weight: 600;
@@ -373,7 +410,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   font-size: clamp(28px, 9vw, 44px);
   color: var(--ink);
   text-align: center;
-  margin: clamp(18px, 6vw, 28px) 0 0;
+  margin: var(--space-5) 0 0;
   rotate: -3deg;
 }
 
@@ -386,13 +423,13 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 .venue__card {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--space-4);
   text-align: left;
   text-decoration: none;
   color: var(--ink);
   background: #fff;
   border-radius: var(--radius);
-  padding: 18px 20px;
+  padding: var(--space-4) var(--pad-card);
   max-width: 380px;
   margin: 0 auto;
   box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
@@ -415,7 +452,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
 .cal-btn {
   display: inline-block;
-  margin-top: clamp(18px, 6vw, 26px);
+  margin-top: var(--space-5);
   background: var(--yellow);
   color: var(--ink);
   font-weight: 700;
@@ -443,18 +480,18 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   text-align: center;
   border-top: 3px solid rgba(49, 31, 92, .12);
 }
-.foot__logo { width: min(56%, 220px); margin: 0 auto 16px; }
+.foot__logo { width: min(56%, 220px); margin: 0 auto var(--space-4); }
 .foot__line {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .04em;
   font-size: 13px;
   opacity: .65;
-  margin: 0 0 14px;
+  margin: 0 0 var(--space-3);
 }
 .foot__pitch {
   max-width: 32ch;
-  margin: 0 auto 10px;
+  margin: 0 auto var(--space-4);
   font-size: 13.5px;
   font-weight: 600;
   line-height: 1.35;
@@ -463,7 +500,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 /* blue button → Jeugdland website */
 .foot__site {
   display: inline-block;
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-4);
   background: var(--royal);
   color: #fff;
   font-weight: 700;
@@ -502,5 +539,6 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
 @media (prefers-reduced-motion: reduce) {
   .hd, .hero__badge, .shell, body { animation: none; }
+  .act, .act:hover, .act:active, .act__title { transition: none; transform: none; }
   html { scroll-behavior: auto; }
 }
