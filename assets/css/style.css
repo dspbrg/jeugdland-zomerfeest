@@ -79,6 +79,43 @@ img { display: block; max-width: 100%; }
 
 section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
+/* ---------- top CTA bar (takeover → jeugdlandhaarlem.nl) ---------- */
+.topbar {
+  position: relative;
+  z-index: 3; /* always above the hero diamonds */
+  text-align: center;
+  padding: clamp(14px, 4vw, 20px) var(--pad) 0;
+}
+.topcta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  text-decoration: none;
+  font-size: clamp(14px, 4.1vw, 17px);
+  padding: 13px 24px;
+  border-radius: 999px;
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--yellow) 70%, black);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.topcta:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--yellow) 70%, black);
+}
+.topcta__arrow {
+  font-size: 1.15em;
+  line-height: 1;
+  animation: nudge-up 1.6s ease-in-out infinite;
+}
+@keyframes nudge-up {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
 /* ---------- shared bits ---------- */
 .section-eyebrow {
   font-family: var(--font-body);
@@ -321,14 +358,8 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   display: grid;
   gap: clamp(10px, 3vw, 16px);
 }
-.artist {
-  font-family: "Fredoka", system-ui, sans-serif;
-  font-weight: 700;
-  line-height: 1.02;
-  font-size: clamp(38px, 12.5vw, 60px);
-}
-.artist--slodde      { color: var(--green); }
-.artist--goochelaar  { color: var(--orange); font-size: clamp(32px, 9.5vw, 48px); }
+/* original poster word-art (SVG) for the artist names */
+.artist-art { width: min(86%, 360px); margin: 0 auto; }
 
 /* =========================================================
    ACTIVITEITEN
@@ -349,10 +380,11 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 .act__title {
   margin: 0;
-  font-family: "Fredoka", system-ui, sans-serif;
+  font-family: var(--font-display); /* Block Berthold — matches the poster */
   font-weight: 700;
   line-height: 1;
-  font-size: clamp(26px, 7.5vw, 36px);
+  font-size: clamp(30px, 9vw, 42px);
+  letter-spacing: .5px;
 }
 .act p {
   margin: 0;
@@ -489,6 +521,6 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hd, .hero__badge, .shell, body { animation: none; }
+  .hd, .hero__badge, .shell, body, .topcta__arrow { animation: none; }
   html { scroll-behavior: auto; }
 }
