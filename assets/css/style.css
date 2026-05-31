@@ -354,42 +354,27 @@ section, header, footer { padding: var(--space-6) var(--pad); }
   gap: var(--space-4);
   align-items: flex-start;
   color: var(--ink);
-  /* tactile lift on hover/tap — cards no longer feel inert */
   box-shadow: 0 4px 14px rgba(49, 31, 92, .06);
-  transition: transform .25s cubic-bezier(.2,.9,.3,1),
-              box-shadow .25s cubic-bezier(.2,.9,.3,1);
+  transition: box-shadow .25s ease;
 }
-.act:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(49, 31, 92, .14); }
-.act:active {
-  transform: translateY(-1px) scale(.99);
-  box-shadow: 0 6px 16px rgba(49, 31, 92, .12);
-  transition-duration: .08s;
-}
+.act:hover { box-shadow: 0 10px 24px rgba(49, 31, 92, .12); } /* subtle desktop nicety */
 .act__title {
-  position: relative;
   margin: 0;
-  padding-left: 26px; /* room for the diamond bullet */
   font-family: var(--font-display); /* Block Berthold — matches the poster */
   font-weight: 700;
   line-height: 1;
   font-size: clamp(30px, 9vw, 42px);
   letter-spacing: .5px;
-  transition: transform .25s cubic-bezier(.2,.9,.3,1);
 }
-/* little faceted diamond before each title, in the card's own colour */
-.act__title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: .42em;
-  width: 13px;
-  height: 13px;
-  background: currentColor;
-  transform: rotate(45deg);
-  border-radius: 2px;
-  box-shadow: inset -2px -2px 0 rgba(255, 255, 255, .45);
+/* scroll-reveal: cards rise + fade in as they enter view (works on mobile).
+   Class is added by JS, so without JS the cards are simply visible. */
+.acts__grid .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .5s ease, transform .5s cubic-bezier(.2,.9,.3,1);
+  transition-delay: calc(var(--i, 0) * 90ms);
 }
-.act:hover .act__title { transform: translateX(3px); }
+.acts__grid .reveal.is-in { opacity: 1; transform: none; }
 .act p {
   margin: 0;
   font-weight: 600;
@@ -539,6 +524,7 @@ section, header, footer { padding: var(--space-6) var(--pad); }
 
 @media (prefers-reduced-motion: reduce) {
   .hd, .hero__badge, .shell, body { animation: none; }
-  .act, .act:hover, .act:active, .act__title { transition: none; transform: none; }
+  .act { transition: none; }
+  .acts__grid .reveal { opacity: 1 !important; transform: none !important; transition: none; }
   html { scroll-behavior: auto; }
 }

@@ -139,3 +139,28 @@
     setInterval(syncTheme, 2000);
   }
 })();
+
+/* ---------------- Scroll-reveal for the activity cards ----------------
+   Cards rise + fade in (staggered) as they scroll into view — adds rhythm
+   on mobile where hover does nothing. Class added by JS, so without JS the
+   cards stay fully visible. Skipped under reduced-motion. */
+(function () {
+  var cards = document.querySelectorAll(".acts__grid .act");
+  if (!cards.length || !("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.add("reveal");
+    cards[i].style.setProperty("--i", i);
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+
+  cards.forEach(function (c) { io.observe(c); });
+})();
