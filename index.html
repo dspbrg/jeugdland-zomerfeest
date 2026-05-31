@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Jeugdland wordt 75 — kom je naar het Zomerfeest? 🎉</title>
+  <meta name="description" content="Jeugdland — de diamant van de buurt — wordt 75 jaar! Vier het Zomerfeest op zaterdag 22 augustus 2026 van 14.00 tot 19.00 op het Theemsplein in Haarlem. Springkussen, live optredens, snackbar én oud-Hollandsche spellen. Trek je glitteroutfit aan en schitter als een diamant!" />
+  <meta name="theme-color" content="#311F5C" />
+
+  <!-- Open Graph (WhatsApp / social share) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Jeugdland" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:title" content="Jeugdland wordt 75 — kom je ook? 🎉" />
+  <meta property="og:description" content="Vier het Zomerfeest op za 22 aug 2026, 14.00–19.00 op het Theemsplein in Haarlem. Springkussen, live optredens, snackbar & oud-Hollandsche spellen. Trek je glitteroutfit aan en schitter als een diamant! 💎" />
+  <meta property="og:url" content="https://dspbrg.github.io/jeugdland-zomerfeest/" />
+  <meta property="og:image" content="https://dspbrg.github.io/jeugdland-zomerfeest/assets/img/og-image.png" />
+  <meta property="og:image:secure_url" content="https://dspbrg.github.io/jeugdland-zomerfeest/assets/img/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Zomerfeest Jeugdland — 22 augustus 2026, Theemsplein Haarlem" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jeugdland wordt 75 — kom je ook? 🎉" />
+  <meta name="twitter:description" content="Zomerfeest · za 22 aug 2026 · 14.00–19.00 · Theemsplein, Haarlem. Springkussen, live optredens, snackbar & oud-Hollandsche spellen. 💎" />
+  <meta name="twitter:image" content="https://dspbrg.github.io/jeugdland-zomerfeest/assets/img/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Barlow+Semi+Condensed:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <main class="shell">
+
+    <!-- ===================== HERO ===================== -->
+    <header class="hero" id="top">
+      <!-- scattered diamonds, like the poster -->
+      <div class="hero__diamonds" aria-hidden="true">
+        <img class="hd hd-1" data-parallax data-speed="0.35" src="assets/img/diamond-union-2.svg" alt="" />
+        <img class="hd hd-2" data-parallax data-speed="0.44" src="assets/img/diamond-1.svg" alt="" />
+        <img class="hd hd-3" data-parallax data-speed="0.22" src="assets/img/diamond-union-1.svg" alt="" />
+        <img class="hd hd-4" data-parallax data-speed="0.40" src="assets/img/diamond-2.svg" alt="" />
+        <img class="hd hd-5" data-parallax data-speed="0.20" src="assets/img/diamond-1.svg" alt="" />
+      </div>
+
+      <img class="hero__logo" data-parallax data-speed="0.12"
+           src="assets/img/jeugdland-logo.svg"
+           alt="Jeugdland" width="361" height="69" />
+
+      <p class="hero__tagline">
+        De diamant van de buurt wordt 75&nbsp;jaar!<br />
+        Trek je glitteroutfit uit de kast en schitter als een diamant
+      </p>
+
+      <div class="hero__title" data-parallax data-speed="0.28">
+        <img class="hero__zomerfeest"
+             src="assets/img/zomerfeest.svg"
+             alt="Zomerfeest" width="629" height="396" />
+        <img class="hero__badge"
+             src="assets/img/badge-75jaar.svg"
+             alt="75 jaar" width="177" height="116" />
+      </div>
+
+      <div class="when" aria-label="Datum en tijd">
+        <span class="when__date">22 Aug 2026</span>
+        <span class="when__time">14.00 – 19.00</span>
+      </div>
+
+      <!-- countdown, direct in de hero -->
+      <div class="countdown" id="aftellen" aria-labelledby="countdown-h">
+        <h2 class="countdown__title" id="countdown-h">Nog even geduld…</h2>
+        <div class="countdown__grid" id="countdown" role="timer" aria-live="polite">
+          <div class="cd-cell"><span class="cd-num" data-unit="days">--</span><span class="cd-lbl">dagen</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">--</span><span class="cd-lbl">uur</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">--</span><span class="cd-lbl">min</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">--</span><span class="cd-lbl">sec</span></div>
+        </div>
+        <p class="countdown__done" id="countdown-done" hidden>
+          🎉 Het is zover — fijn Zomerfeest! 🎉
+        </p>
+      </div>
+    </header>
+
+    <!-- ===================== LINE-UP ===================== -->
+    <section class="lineup" aria-labelledby="lineup-h">
+      <span class="pill pill--ink" id="lineup-h">Live optredens van</span>
+      <ul class="lineup__list">
+        <li><img src="assets/img/artist-slodevos.svg" alt="SLoDe &amp; VoS" /></li>
+        <li><img src="assets/img/artist-magicmike.svg" alt="Magic Mike" /></li>
+      </ul>
+    </section>
+
+    <!-- ===================== ACTIVITEITEN ===================== -->
+    <section class="acts" aria-labelledby="acts-h">
+      <h2 class="section-eyebrow section-eyebrow--center" id="acts-h">Er is van alles te doen</h2>
+      <div class="acts__grid">
+        <article class="act act--snackbar">
+          <img src="assets/img/act-snackbar.svg" alt="Snackbar" />
+          <p>Patat, snacks &amp; iets fris voor iedereen.</p>
+        </article>
+        <article class="act act--springkussen">
+          <img src="assets/img/act-springkussen.svg" alt="Springkussen" />
+          <p>Stuiteren tot je niet meer kan!</p>
+        </article>
+        <article class="act act--spellen">
+          <img src="assets/img/act-spellen.svg" alt="Oud-Hollandsche spellen" />
+          <p>Sjoelen, zaklopen, blikgooien en meer.</p>
+        </article>
+      </div>
+      <p class="acts__more">…en&nbsp;meer!</p>
+    </section>
+
+    <!-- ===================== LOCATIE ===================== -->
+    <section class="venue" aria-labelledby="venue-h">
+      <h2 class="section-eyebrow section-eyebrow--center" id="venue-h">Kom je ook?</h2>
+      <a class="venue__card"
+         href="https://www.google.com/maps/search/?api=1&query=Theemsplein+22+Haarlem"
+         target="_blank" rel="noopener">
+        <img class="venue__icon" src="assets/img/icon-walk.svg" alt="" aria-hidden="true" />
+        <span class="venue__addr">
+          <strong>Theemsplein 22</strong>
+          <span>2014 CN Haarlem</span>
+        </span>
+        <span class="venue__go">Route&nbsp;›</span>
+      </a>
+      <a class="cal-btn" id="cal-btn" href="#" download="jeugdland-zomerfeest.ics">
+        Zet in mijn agenda
+      </a>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="foot">
+      <img class="foot__logo" src="assets/img/jeugdland-logo.svg" alt="Jeugdland" />
+      <p class="foot__line">75&nbsp;jaar de diamant van de buurt · 1951&nbsp;–&nbsp;2026</p>
+      <a class="foot__top" href="#top">↑ naar boven</a>
+    </footer>
+
+  </main>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

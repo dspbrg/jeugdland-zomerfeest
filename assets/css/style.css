@@ -1,0 +1,406 @@
+/* =========================================================
+   Jeugdland 75 jaar · Zomerfeest — mobile-first stylesheet
+   ========================================================= */
+
+/* brand display font (matches the poster's "22 Aug 2026" / "en meer!") */
+@font-face {
+  font-family: "Block Berthold";
+  src: url("../fonts/BlockBertholdCondensed.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* brand palette (from the Figma poster) */
+  --purple:  #311F5C;
+  --royal:   #384FA2;
+  --blue:    #0092CA;
+  --cyan:    #12BDD6;
+  --green:   #00B289;
+  --red:     #E54225;
+  --coral:   #F27156;
+  --orange:  #F27521;
+  --yellow:  #FDC010;
+  --pink:    #E44B67;
+  --salmon:  #F4898A;
+  --ink:     #231F20;
+  --paper:   #FFFFFF;
+  --cream:   #FFF7E6;
+
+  --font-display: "Block Berthold", "Fredoka", system-ui, sans-serif;
+  --font-body: "Barlow Semi Condensed", system-ui, sans-serif;
+
+  --shell-max: 480px;        /* phone-width canvas, centered on desktop */
+  --pad: clamp(20px, 6vw, 32px);
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+  line-height: 1.35;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ---------- shell / canvas ---------- */
+.shell {
+  position: relative;
+  z-index: 1;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  background-color: var(--cream); /* fallback */
+  box-shadow: 0 0 60px rgba(49, 31, 92, .12);
+  min-height: 100vh;
+  /* slow drift through soft brand tints behind the light sections */
+  animation: bgfade 40s ease-in-out infinite;
+}
+@keyframes bgfade {
+  0%,  100% { background-color: #FFF7E6; } /* warm cream  */
+  20%       { background-color: #E9F6FB; } /* soft cyan   */
+  40%       { background-color: #FCEBF0; } /* soft pink   */
+  60%       { background-color: #E5F6EF; } /* soft green  */
+  80%       { background-color: #FDEEE8; } /* soft coral  */
+}
+
+section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
+
+/* ---------- shared bits ---------- */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: clamp(15px, 4.5vw, 19px);
+  color: var(--royal);
+  margin: 0 0 18px;
+}
+.section-eyebrow--center { text-align: center; }
+
+.pill {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  font-size: clamp(15px, 4.6vw, 20px);
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+.pill--ink { background: var(--ink); color: #fff; }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  position: relative;
+  text-align: center;
+  background: transparent; /* lets the shell's color-fade show through */
+  padding-top: clamp(32px, 9vw, 56px);
+  /* note: no overflow:hidden — lets the lowest diamonds drift across the
+     boundary into the empty top of the line-up section (shell still clips
+     horizontally, so nothing spills sideways out of the canvas) */
+}
+/* hero children sit above the diamonds */
+.hero > *:not(.hero__diamonds) { position: relative; z-index: 1; }
+
+/* ---------- scattered diamonds ---------- */
+.hero__diamonds { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hd {
+  position: absolute;
+  width: 22%;
+  max-width: 96px;
+  opacity: .92;
+  will-change: translate, scale, transform;
+}
+/* Four independent layers compose without conflict:
+   translate (JS parallax) → rotate (rest angle) → scale (breathing) → transform (wobble).
+   Each diamond gets its own keyframe mix + non-harmonic timing + offset delay,
+   so they drift in and out of phase — never pulsing all together. */
+/* ONE coordinated gesture per diamond: scale + rotation share a single
+   timeline, so they swell and tilt together as one move and settle back
+   together. Variety lives BETWEEN diamonds (different float-* variant +
+   duration + delay), never within one — so nothing looks disjointed.
+   Each keyframe rest-holds the first ~third, then floats out and eases home. */
+.hd-1 { top: 4%;    left: -5%;  rotate: -14deg; animation: float-c 5.1s ease-in-out -0.2s infinite; }
+.hd-2 { top: 30%;   right: -6%; rotate: 12deg;  width: 26%; animation: float-b 4.7s ease-in-out -2.4s infinite; }
+.hd-3 { top: 52%;   left: -7%;  rotate: 8deg;   width: 28%; animation: float-a 5.8s ease-in-out -3.1s infinite; }
+.hd-4 { bottom: 16%; right: -4%; rotate: -10deg; animation: float-d 4.9s ease-in-out -1.0s infinite; }
+.hd-5 { bottom: 2%;  left: 4%;  rotate: 16deg;  width: 16%; opacity: .8; animation: float-a 5.4s ease-in-out -2.6s infinite; }
+
+/* badge: gentle scale-only pulse (no rotation, so nothing to sync) */
+@keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.10; } }
+
+/* unified scale+tilt gestures — quick float out, long soft return */
+@keyframes float-a { 0%, 32% { scale: 1; transform: rotate(0deg); } 58% { scale: 1.26; transform: rotate(9deg);  } 100% { scale: 1; transform: rotate(0deg); } }
+@keyframes float-b { 0%, 38% { scale: 1; transform: rotate(0deg); } 62% { scale: 1.16; transform: rotate(-8deg); } 100% { scale: 1; transform: rotate(0deg); } }
+@keyframes float-c { 0%, 30% { scale: 1; transform: rotate(0deg); } 56% { scale: 1.32; transform: rotate(12deg); } 100% { scale: 1; transform: rotate(0deg); } }
+@keyframes float-d { 0%, 40% { scale: 1; transform: rotate(0deg); } 64% { scale: 1.14; transform: rotate(-11deg); } 100% { scale: 1; transform: rotate(0deg); } }
+@keyframes float-e { 0%, 35% { scale: 1; transform: rotate(0deg); } 60% { scale: 1.22; transform: rotate(-6deg); } 100% { scale: 1; transform: rotate(0deg); } }
+@keyframes float-f { 0%, 28% { scale: 1; transform: rotate(0deg); } 52% { scale: 1.30; transform: rotate(7deg);  } 100% { scale: 1; transform: rotate(0deg); } }
+
+.hero__logo {
+  width: min(72%, 300px);
+  margin: 0 auto clamp(14px, 4vw, 22px);
+}
+.hero__tagline {
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.08;
+  letter-spacing: .01em;
+  font-size: clamp(15px, 4.6vw, 19px);
+  color: var(--ink);
+  margin: 0 auto clamp(18px, 6vw, 30px);
+  max-width: 34ch;
+}
+
+.hero__title {
+  position: relative;
+  margin-bottom: clamp(18px, 6vw, 28px);
+  will-change: translate;
+}
+.hero__zomerfeest { width: 100%; }
+/* badge is locked to the title (moves with ZOMERFEEST on scroll) and dips a
+   touch onto the artwork at its bottom edge */
+.hero__badge {
+  position: absolute;
+  top: calc(7% - 10px);
+  right: 10px;
+  width: 32%;
+  max-width: 136px;
+  rotate: 6deg;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 6px 10px rgba(35, 31, 32, .25));
+  will-change: scale;
+  animation: breathe 5s ease-in-out infinite;
+}
+.hero__logo { will-change: translate; }
+
+.when {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: .95;
+}
+.when__date { color: var(--purple); font-size: clamp(40px, 13vw, 64px); }
+.when__time { color: var(--royal);  font-size: clamp(40px, 13vw, 64px); }
+
+/* =========================================================
+   COUNTDOWN (card in hero)
+   ========================================================= */
+.countdown {
+  background: var(--purple);
+  color: #fff;
+  text-align: center;
+  border-radius: var(--radius);
+  padding: clamp(20px, 6vw, 30px) clamp(14px, 4vw, 22px);
+  margin-top: clamp(22px, 7vw, 34px);
+  box-shadow: 0 12px 28px rgba(49, 31, 92, .25);
+}
+.countdown__title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: clamp(14px, 4.2vw, 18px);
+  color: var(--yellow);
+  margin: 0 0 16px;
+}
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 3vw, 14px);
+  max-width: 380px;
+  margin: 0 auto;
+}
+.cd-cell {
+  background: rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  padding: clamp(12px, 4vw, 18px) 4px;
+}
+.cd-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 10vw, 46px);
+  line-height: 1;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+.cd-lbl {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  opacity: .8;
+}
+.countdown__done {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 6.5vw, 30px);
+  color: var(--yellow);
+  margin: 0;
+}
+
+/* =========================================================
+   LINE-UP
+   ========================================================= */
+.lineup { text-align: center; background: transparent; }
+.lineup__list {
+  list-style: none;
+  margin: clamp(20px, 7vw, 34px) 0 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(18px, 6vw, 30px);
+}
+.lineup__list img {
+  width: min(92%, 360px);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   ACTIVITEITEN
+   ========================================================= */
+.acts { background: transparent; }
+.acts__grid {
+  display: grid;
+  gap: clamp(14px, 4vw, 18px);
+}
+.act {
+  border-radius: var(--radius);
+  padding: clamp(20px, 6vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--ink);
+}
+.act img { height: clamp(26px, 7vw, 34px); width: auto; }
+.act p {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(15px, 4.4vw, 18px);
+}
+.act--snackbar     { background: color-mix(in srgb, var(--yellow) 24%, white); }
+.act--springkussen { background: color-mix(in srgb, var(--coral) 22%, white); }
+.act--spellen      { background: color-mix(in srgb, var(--cyan) 20%, white); }
+
+.acts__more {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 9vw, 44px);
+  color: var(--ink);
+  text-align: center;
+  margin: clamp(18px, 6vw, 28px) 0 0;
+  rotate: -3deg;
+}
+
+/* =========================================================
+   LOCATIE
+   ========================================================= */
+.venue { background: var(--royal); color: #fff; text-align: center; }
+.venue .section-eyebrow { color: var(--yellow); text-align: center; }
+
+.venue__card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  max-width: 380px;
+  margin: 0 auto;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+  transition: transform .15s ease;
+}
+.venue__card:active { transform: scale(.98); }
+/* raw SVG comes in vertically mirrored (Figma applied rotate(180) scaleX(-1)) */
+.venue__icon { height: 34px; width: auto; transform: scaleY(-1); }
+.venue__addr { display: flex; flex-direction: column; line-height: 1.15; }
+.venue__addr strong { font-size: 20px; }
+.venue__addr span { font-size: 15px; opacity: .7; }
+.venue__go {
+  margin-left: auto;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--royal);
+  white-space: nowrap;
+}
+
+.cal-btn {
+  display: inline-block;
+  margin-top: clamp(18px, 6vw, 26px);
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: clamp(15px, 4.4vw, 18px);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--yellow) 70%, black);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.cal-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--yellow) 70%, black);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+/* light footer so every logo letter — incl. the dark-purple D — stays visible */
+.foot {
+  background: #EEE8F6;
+  color: var(--purple);
+  text-align: center;
+  border-top: 3px solid rgba(49, 31, 92, .12);
+}
+.foot__logo { width: min(56%, 220px); margin: 0 auto 16px; }
+.foot__line {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: 13px;
+  opacity: .65;
+  margin: 0 0 14px;
+}
+.foot__top {
+  color: var(--red);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-decoration: none;
+}
+
+/* =========================================================
+   Responsive niceties
+   ========================================================= */
+@media (min-width: 481px) {
+  .shell { margin-block: 24px; border-radius: 28px; overflow: hidden; }
+  body { background: var(--purple); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hd, .hero__badge, .shell { animation: none; }
+  html { scroll-behavior: auto; }
+}

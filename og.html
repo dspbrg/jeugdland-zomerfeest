@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: "Block Berthold";
+    src: url("assets/fonts/BlockBertholdCondensed.ttf") format("truetype");
+    font-weight: 400 700; font-style: normal;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: "Barlow Semi Condensed", system-ui, sans-serif;
+    background:
+      radial-gradient(130% 120% at 50% -20%, #FFFDF6, #FFF1D6 70%);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  /* corner diamonds */
+  .d { position: absolute; opacity: .5; }
+  .d1 { top: -30px;  left: -30px;  width: 190px; rotate: -12deg; }
+  .d2 { top: 40px;   right: -34px; width: 150px; rotate: 14deg; }
+  .d3 { bottom: -40px; left: 60px; width: 150px; rotate: 18deg; }
+  .d4 { bottom: -30px; right: -20px; width: 200px; rotate: -10deg; }
+
+  .logo { height: 58px; margin-bottom: 14px; }
+  .titlewrap { position: relative; width: 500px; margin-bottom: 6px; }
+  .zomer { width: 100%; display: block; }
+  .badge {
+    position: absolute; top: 0; right: -8px; width: 142px; rotate: 6deg;
+    filter: drop-shadow(0 6px 10px rgba(35,31,32,.25));
+  }
+  .when {
+    font-family: "Block Berthold", sans-serif;
+    font-weight: 700; line-height: .95; letter-spacing: .5px;
+  }
+  .when .date { color: #311F5C; font-size: 52px; }
+  .when .dot  { color: #E54225; }
+  .when .time { color: #384FA2; font-size: 52px; }
+  .meta {
+    margin-top: 16px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+    font-size: 26px; color: #231F20;
+  }
+  .cta {
+    margin-top: 12px;
+    display: inline-block;
+    background: #FDC010; color: #231F20;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+    font-size: 26px; padding: 10px 26px; border-radius: 999px;
+    rotate: -2deg;
+  }
+</style>
+</head>
+<body>
+  <img class="d d1" src="assets/img/diamond-union-1.svg" alt="" />
+  <img class="d d2" src="assets/img/diamond-2.svg" alt="" />
+  <img class="d d3" src="assets/img/diamond-1.svg" alt="" />
+  <img class="d d4" src="assets/img/diamond-union-2.svg" alt="" />
+
+  <img class="logo" src="assets/img/jeugdland-logo.svg" alt="Jeugdland" />
+
+  <div class="titlewrap">
+    <img class="zomer" src="assets/img/zomerfeest.svg" alt="Zomerfeest" />
+    <img class="badge" src="assets/img/badge-75jaar.svg" alt="75 jaar" />
+  </div>
+
+  <div class="when">
+    <span class="date">22 aug 2026</span>
+    <span class="dot"> · </span>
+    <span class="time">14.00 – 19.00</span>
+  </div>
+
+  <div class="meta">Theemsplein 22, Haarlem</div>
+  <div class="cta">Kom je ook? 💎</div>
+</body>
+</html>
