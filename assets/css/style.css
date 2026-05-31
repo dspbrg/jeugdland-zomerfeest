@@ -136,22 +136,25 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    together. Variety lives BETWEEN diamonds (different float-* variant +
    duration + delay), never within one — so nothing looks disjointed.
    Each keyframe rest-holds the first ~third, then floats out and eases home. */
-.hd-1 { top: 4%;    left: -5%;  rotate: -14deg; animation: float-c 5.1s ease-in-out -0.2s infinite; }
-.hd-2 { top: 30%;   right: -6%; rotate: 12deg;  width: 26%; animation: float-b 4.7s ease-in-out -2.4s infinite; }
-.hd-3 { top: 52%;   left: -7%;  rotate: 8deg;   width: 28%; animation: float-a 5.8s ease-in-out -3.1s infinite; }
-.hd-4 { bottom: 16%; right: -4%; rotate: -10deg; animation: float-d 4.9s ease-in-out -1.0s infinite; }
-.hd-5 { bottom: 2%;  left: 4%;  rotate: 16deg;  width: 16%; opacity: .8; animation: float-a 5.4s ease-in-out -2.6s infinite; }
+.hd-1 { top: 4%;    left: -5%;  rotate: -14deg; animation: float-c 1.10s cubic-bezier(.2,.9,.3,1) -0.20s infinite alternate; }
+.hd-2 { top: 30%;   right: -6%; rotate: 12deg;  width: 26%; animation: float-b 0.86s cubic-bezier(.2,.9,.3,1) -0.40s infinite alternate; }
+.hd-3 { top: 52%;   left: -7%;  rotate: 8deg;   width: 28%; animation: float-a 1.28s cubic-bezier(.2,.9,.3,1) -0.70s infinite alternate; }
+.hd-4 { bottom: 16%; right: -4%; rotate: -10deg; animation: float-d 0.98s cubic-bezier(.2,.9,.3,1) -0.30s infinite alternate; }
+.hd-5 { bottom: 2%;  left: 4%;  rotate: 16deg;  width: 16%; opacity: .8; animation: float-e 1.16s cubic-bezier(.2,.9,.3,1) -0.55s infinite alternate; }
 
 /* badge: gentle scale-only pulse (no rotation, so nothing to sync) */
 @keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.10; } }
 
-/* unified scale+tilt gestures — quick float out, long soft return */
-@keyframes float-a { 0%, 32% { scale: 1; transform: rotate(0deg); } 58% { scale: 1.26; transform: rotate(9deg);  } 100% { scale: 1; transform: rotate(0deg); } }
-@keyframes float-b { 0%, 38% { scale: 1; transform: rotate(0deg); } 62% { scale: 1.16; transform: rotate(-8deg); } 100% { scale: 1; transform: rotate(0deg); } }
-@keyframes float-c { 0%, 30% { scale: 1; transform: rotate(0deg); } 56% { scale: 1.32; transform: rotate(12deg); } 100% { scale: 1; transform: rotate(0deg); } }
-@keyframes float-d { 0%, 40% { scale: 1; transform: rotate(0deg); } 64% { scale: 1.14; transform: rotate(-11deg); } 100% { scale: 1; transform: rotate(0deg); } }
-@keyframes float-e { 0%, 35% { scale: 1; transform: rotate(0deg); } 60% { scale: 1.22; transform: rotate(-6deg); } 100% { scale: 1; transform: rotate(0deg); } }
-@keyframes float-f { 0%, 28% { scale: 1; transform: rotate(0deg); } 52% { scale: 1.30; transform: rotate(7deg);  } 100% { scale: 1; transform: rotate(0deg); } }
+/* Ping-pong "EQ bar" bounce: each diamond pumps between rest and a punched
+   state. Used with animation-direction: alternate, so it bounces rest⇄hit
+   forever (no reset jump). Scale + tilt move as one. Random duration/phase
+   per diamond ⇒ they sit at different "heights", like equalizer bars. */
+@keyframes float-a { from { scale: 1; transform: rotate(0deg); } to { scale: 1.24; transform: rotate(8deg);  } }
+@keyframes float-b { from { scale: 1; transform: rotate(0deg); } to { scale: 1.32; transform: rotate(-9deg); } }
+@keyframes float-c { from { scale: 1; transform: rotate(0deg); } to { scale: 1.18; transform: rotate(5deg);  } }
+@keyframes float-d { from { scale: 1; transform: rotate(0deg); } to { scale: 1.28; transform: rotate(-6deg); } }
+@keyframes float-e { from { scale: 1; transform: rotate(0deg); } to { scale: 1.20; transform: rotate(11deg); } }
+@keyframes float-f { from { scale: 1; transform: rotate(0deg); } to { scale: 1.34; transform: rotate(-4deg); } }
 
 .hero__logo {
   width: min(72%, 300px);

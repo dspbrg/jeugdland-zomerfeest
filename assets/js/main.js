@@ -115,13 +115,14 @@
      Skipped under reduced-motion (the CSS media query then keeps them still). */
   if (!reduce) {
     var variants = ["float-a", "float-b", "float-c", "float-d", "float-e", "float-f"];
+    var ease = "cubic-bezier(.2,.9,.3,1)";        // snappy attack, quick settle
     var diamonds = [].slice.call(document.querySelectorAll(".hd"));
     for (var d = 0; d < diamonds.length; d++) {
       var name = variants[Math.floor(Math.random() * variants.length)];
-      var dur = 3.8 + Math.random() * 3.4;        // 3.8s – 7.2s
-      var delay = -Math.random() * dur;           // random point in the cycle
+      var dur = 0.7 + Math.random() * 0.9;        // 0.7s – 1.6s — bar-bounce tempo
+      var delay = -Math.random() * dur * 2;        // random point in the ping-pong
       diamonds[d].style.animation =
-        name + " " + dur.toFixed(2) + "s ease-in-out " + delay.toFixed(2) + "s infinite";
+        name + " " + dur.toFixed(2) + "s " + ease + " " + delay.toFixed(2) + "s infinite alternate";
     }
   }
 
