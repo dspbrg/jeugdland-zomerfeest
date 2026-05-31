@@ -319,12 +319,16 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   margin: clamp(20px, 7vw, 34px) 0 0;
   padding: 0;
   display: grid;
-  gap: clamp(18px, 6vw, 30px);
+  gap: clamp(10px, 3vw, 16px);
 }
-.lineup__list img {
-  width: min(92%, 360px);
-  margin: 0 auto;
+.artist {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.02;
+  font-size: clamp(38px, 12.5vw, 60px);
 }
+.artist--slodde      { color: var(--green); }
+.artist--goochelaar  { color: var(--orange); font-size: clamp(32px, 9.5vw, 48px); }
 
 /* =========================================================
    ACTIVITEITEN
@@ -343,7 +347,13 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   align-items: flex-start;
   color: var(--ink);
 }
-.act img { height: clamp(26px, 7vw, 34px); width: auto; }
+.act__title {
+  margin: 0;
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  font-size: clamp(26px, 7.5vw, 36px);
+}
 .act p {
   margin: 0;
   font-weight: 600;
@@ -352,6 +362,9 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 .act--snackbar     { background: color-mix(in srgb, var(--yellow) 24%, white); }
 .act--springkussen { background: color-mix(in srgb, var(--coral) 22%, white); }
 .act--spellen      { background: color-mix(in srgb, var(--cyan) 20%, white); }
+.act--snackbar     .act__title { color: var(--royal); }
+.act--springkussen .act__title { color: var(--red); }
+.act--spellen      .act__title { color: var(--blue); }
 
 .acts__more {
   font-family: var(--font-display);
@@ -438,7 +451,27 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   opacity: .65;
   margin: 0 0 14px;
 }
+.foot__site {
+  display: inline-block;
+  margin: 0 0 18px;
+  background: var(--royal);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  text-decoration: none;
+  font-size: clamp(14px, 4vw, 16px);
+  padding: 12px 24px;
+  border-radius: 999px;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--royal) 70%, black);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.foot__site:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--royal) 70%, black);
+}
 .foot__top {
+  display: block;
   color: var(--red);
   font-weight: 700;
   text-transform: uppercase;
