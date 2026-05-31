@@ -112,7 +112,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
                  stay below the line-up layer (z-index:1) → behind its text */
   text-align: center;
   background: transparent; /* lets the shell's color-fade show through */
-  padding-top: clamp(16px, 4vw, 28px);
+  padding-top: clamp(20px, 5vw, 36px);
   /* note: no overflow:hidden — lets the lowest diamonds drift across the
      boundary into the empty top of the line-up section (shell still clips
      horizontally, so nothing spills sideways out of the canvas) */
@@ -258,7 +258,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   text-align: center;
   border-radius: var(--radius);
   padding: clamp(20px, 6vw, 30px) clamp(14px, 4vw, 22px);
-  margin-top: clamp(22px, 7vw, 34px);
+  margin-top: clamp(60px, 16vw, 84px);
   box-shadow: 0 12px 28px rgba(49, 31, 92, .25);
 }
 .countdown__title {
@@ -323,8 +323,9 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 /* original poster word-art (SVG) for the artist names — like Figma 11:95 */
 .artist-art { margin: 0 auto; }
+/* exact size ratio from Figma 11:95 — SLodDe 612.6 : Goochelaar 451.4 (×0.737) */
 .artist-art--slodde     { width: min(88%, 380px); }
-.artist-art--goochelaar { width: min(49%, 208px); }   /* smaller — SLodDe is the headliner */
+.artist-art--goochelaar { width: min(65%, 280px); }
 
 /* =========================================================
    ACTIVITEITEN
@@ -458,19 +459,28 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   line-height: 1.35;
   color: color-mix(in srgb, var(--purple) 72%, transparent);
 }
-/* small, subtle coloured text link */
+/* blue button → Jeugdland website */
 .foot__site {
   display: inline-block;
   margin: 0 0 16px;
-  color: var(--royal);
+  background: var(--royal);
+  color: #fff;
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: .01em;
+  text-transform: uppercase;
+  letter-spacing: .03em;
   text-decoration: none;
+  font-size: clamp(13px, 3.8vw, 15px);
+  padding: 12px 24px;
+  border-radius: 999px;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--royal) 70%, black);
+  transition: transform .1s ease, box-shadow .1s ease;
 }
-.foot__site span { transition: transform .15s ease; display: inline-block; }
-.foot__site:hover { text-decoration: underline; }
+.foot__site span { display: inline-block; transition: transform .15s ease; }
 .foot__site:hover span { transform: translateX(3px); }
+.foot__site:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--royal) 70%, black);
+}
 .foot__top {
   display: block;
   color: var(--red);
