@@ -225,11 +225,11 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    touch onto the artwork at its bottom edge */
 .hero__badge {
   position: absolute;
-  top: calc(7% - 10px);
-  right: 10px;
-  width: 32%;
-  max-width: 136px;
-  height: auto; /* keep the bubble's real proportions (was stretched tall) */
+  top: -8%;          /* high, like the poster — body above the word */
+  right: -6%;        /* tucked to the top-right, just past the edge */
+  width: 28%;        /* poster ratio (≈28% of the title) */
+  max-width: 122px;
+  height: auto;      /* keep the bubble's real proportions (was stretched tall) */
   rotate: 6deg;
   transform-origin: bottom center;
   filter: drop-shadow(0 6px 10px rgba(35, 31, 32, .25));
@@ -498,8 +498,6 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 @media (min-width: 481px) {
   .shell { margin-block: 24px; border-radius: 28px; overflow: hidden; }
   body { background: var(--purple); animation: none; }
-  /* wider title here makes the % offset taller → nudge the badge back up 15px */
-  .hero__badge { top: calc(7% - 25px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
