@@ -124,4 +124,17 @@
         name + " " + dur.toFixed(2) + "s ease-in-out " + delay.toFixed(2) + "s infinite";
     }
   }
+
+  /* ---------------- Sync the browser UI tint to the fading background ----
+     Keeps iOS Safari's bar / status area matching the canvas as it fades,
+     instead of a fixed colour clashing behind the Dynamic Island. */
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var shell = document.querySelector(".shell");
+  if (themeMeta && shell) {
+    var syncTheme = function () {
+      themeMeta.setAttribute("content", getComputedStyle(shell).backgroundColor);
+    };
+    syncTheme();
+    setInterval(syncTheme, 2000);
+  }
 })();

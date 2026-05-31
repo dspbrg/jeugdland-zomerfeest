@@ -44,9 +44,12 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--cream);
+  background-color: var(--cream);
   overflow-x: hidden;
   line-height: 1.35;
+  /* same fade as the shell, in sync — so the iOS safe area behind the
+     Dynamic Island matches the canvas instead of a static cream band */
+  animation: bgfade 40s ease-in-out infinite;
 }
 
 img { display: block; max-width: 100%; }
@@ -60,6 +63,9 @@ img { display: block; max-width: 100%; }
   background-color: var(--cream); /* fallback */
   box-shadow: 0 0 60px rgba(49, 31, 92, .12);
   min-height: 100vh;
+  /* clip sideways (diamonds bleed past the edge → no horizontal scroll)
+     while still allowing them to drift vertically across section borders */
+  overflow-x: clip;
   /* slow drift through soft brand tints behind the light sections */
   animation: bgfade 40s ease-in-out infinite;
 }
@@ -397,10 +403,10 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    ========================================================= */
 @media (min-width: 481px) {
   .shell { margin-block: 24px; border-radius: 28px; overflow: hidden; }
-  body { background: var(--purple); }
+  body { background: var(--purple); animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hd, .hero__badge, .shell { animation: none; }
+  .hd, .hero__badge, .shell, body { animation: none; }
   html { scroll-behavior: auto; }
 }
