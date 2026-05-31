@@ -313,7 +313,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
    ========================================================= */
 /* sits above the hero diamonds that drift across the boundary, so they
    show through the (transparent) background but stay BEHIND the typography */
-.lineup { text-align: center; background: transparent; position: relative; z-index: 1; }
+.lineup { text-align: center; background: transparent; position: relative; z-index: 1; padding-inline: 16px; }
 .lineup__list {
   list-style: none;
   margin: clamp(20px, 7vw, 34px) 0 0;
@@ -323,9 +323,9 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 /* original poster word-art (SVG) for the artist names — like Figma 11:95 */
 .artist-art { margin: 0 auto; }
-/* exact size ratio from Figma 11:95 — SLodDe 612.6 : Goochelaar 451.4 (×0.737) */
-.artist-art--slodde     { width: min(88%, 380px); }
-.artist-art--goochelaar { width: min(65%, 280px); }
+/* SLodDe fills to the 16px gutters; Goochelaar keeps the Figma 11:95 ratio (×0.737) */
+.artist-art--slodde     { width: 100%; }
+.artist-art--goochelaar { width: 74%; }
 
 /* =========================================================
    ACTIVITEITEN
