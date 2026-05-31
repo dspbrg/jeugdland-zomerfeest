@@ -79,33 +79,25 @@ img { display: block; max-width: 100%; }
 
 section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
-/* ---------- top CTA bar (takeover → jeugdlandhaarlem.nl) ---------- */
+/* ---------- top bar (takeover → jeugdlandhaarlem.nl) ---------- */
 .topbar {
   position: relative;
   z-index: 3; /* always above the hero diamonds */
-  text-align: center;
-  padding: clamp(14px, 4vw, 20px) var(--pad) 0;
-}
-.topcta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--yellow);
-  color: var(--ink);
+  justify-content: center;
+  gap: 9px;
+  background: var(--royal);
+  color: #fff;
+  text-decoration: none;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .03em;
-  text-decoration: none;
-  font-size: clamp(14px, 4.1vw, 17px);
-  padding: 13px 24px;
-  border-radius: 999px;
-  box-shadow: 0 6px 0 color-mix(in srgb, var(--yellow) 70%, black);
-  transition: transform .1s ease, box-shadow .1s ease;
+  letter-spacing: .04em;
+  font-size: clamp(13px, 3.9vw, 16px);
+  padding: 14px 18px;
+  transition: background .15s ease;
 }
-.topcta:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--yellow) 70%, black);
-}
+.topbar:active { background: color-mix(in srgb, var(--royal) 85%, black); }
 .topcta__arrow {
   font-size: 1.15em;
   line-height: 1;
@@ -358,8 +350,10 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   display: grid;
   gap: clamp(10px, 3vw, 16px);
 }
-/* original poster word-art (SVG) for the artist names */
-.artist-art { width: min(86%, 360px); margin: 0 auto; }
+/* original poster word-art (SVG) for the artist names — like Figma 11:95 */
+.artist-art { margin: 0 auto; }
+.artist-art--slodde     { width: min(88%, 380px); }
+.artist-art--goochelaar { width: min(62%, 268px); }   /* stacked two lines, narrower */
 
 /* =========================================================
    ACTIVITEITEN
@@ -393,10 +387,12 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 .act--snackbar     { background: color-mix(in srgb, var(--yellow) 24%, white); }
 .act--springkussen { background: color-mix(in srgb, var(--coral) 22%, white); }
-.act--spellen      { background: color-mix(in srgb, var(--cyan) 20%, white); }
+.act--schminken    { background: color-mix(in srgb, var(--pink) 18%, white); }
+.act--spelletjes   { background: color-mix(in srgb, var(--cyan) 20%, white); }
 .act--snackbar     .act__title { color: var(--royal); }
 .act--springkussen .act__title { color: var(--red); }
-.act--spellen      .act__title { color: var(--blue); }
+.act--schminken    .act__title { color: var(--pink); }
+.act--spelletjes   .act__title { color: var(--blue); }
 
 .acts__more {
   font-family: var(--font-display);
@@ -518,6 +514,8 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 @media (min-width: 481px) {
   .shell { margin-block: 24px; border-radius: 28px; overflow: hidden; }
   body { background: var(--purple); animation: none; }
+  /* wider title here makes the % offset taller → nudge the badge back up 15px */
+  .hero__badge { top: calc(7% - 25px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
