@@ -164,3 +164,90 @@
 
   cards.forEach(function (c) { io.observe(c); });
 })();
+
+/* ---------------- ZOMERFEEST letter colour shuffle ----------------
+   Inline the word-art SVG (the <img> stays as a no-JS fallback), then let
+   each letter flip between the colours it ALREADY uses — instant (no fade),
+   random, and never the same colour as a left/right neighbour. Each letter
+   runs on its own loose timer so they change out of sync. Reduced-motion safe. */
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var img = document.querySelector(".hero__zomerfeest");
+  if (!img || !img.getAttribute("src")) return;
+
+  fetch(img.getAttribute("src"))
+    .then(function (r) { return r.text(); })
+    .then(function (txt) {
+      var tmp = document.createElement("div");
+      tmp.innerHTML = txt;
+      var svg = tmp.querySelector("svg");
+      if (!svg) return;
+      svg.setAttribute("class", "hero__zomerfeest");
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+      img.replaceWith(svg);
+      start(svg);
+    })
+    .catch(function () { /* keep the <img> fallback */ });
+
+  function start(svg) {
+    var paths = [].slice.call(svg.querySelectorAll("path"));
+    var palette = [];
+    var letters = [];
+    paths.forEach(function (p) {
+      var m = (p.getAttribute("fill") || "").match(/#([0-9a-fA-F]{6})/);
+      if (!m) return;
+      var col = "#" + m[1].toUpperCase();
+      if (palette.indexOf(col) === -1) palette.push(col);
+      var b;
+      try { b = p.getBBox(); } catch (e) { return; }
+      letters.push({ el: p, x: b.x, y: b.y, color: col });
+    });
+    if (letters.length < 2 || palette.length < 2) return;
+
+    // split into the two rows (ZOMER / FEEST) at the biggest vertical gap
+    letters.sort(function (a, b) { return a.y - b.y; });
+    var splitIdx = 1, maxGap = -1;
+    for (var i = 1; i < letters.length; i++) {
+      var g = letters[i].y - letters[i - 1].y;
+      if (g > maxGap) { maxGap = g; splitIdx = i; }
+    }
+    var rows = [letters.slice(0, splitIdx), letters.slice(splitIdx)];
+    rows.forEach(function (row) {
+      row.sort(function (a, b) { return a.x - b.x; });
+      row.forEach(function (L, i) {
+        L.left = row[i - 1] || null;
+        L.right = row[i + 1] || null;
+      });
+    });
+
+    function pick(L) {
+      var avoid = {};
+      avoid[L.color] = 1;
+      if (L.left) avoid[L.left.color] = 1;
+      if (L.right) avoid[L.right.color] = 1;
+      var opts = palette.filter(function (c) { return !avoid[c]; });
+      if (!opts.length) opts = palette.filter(function (c) { return c !== L.color; });
+      return opts[Math.floor(Math.random() * opts.length)];
+    }
+
+    // resolve any same-colour neighbours in the starting artwork (left→right)
+    rows.forEach(function (row) {
+      row.forEach(function (L) {
+        if (L.left && L.left.color === L.color) {
+          L.color = pick(L);
+          L.el.setAttribute("fill", L.color);
+        }
+      });
+    });
+
+    function tick(L) {
+      L.color = pick(L);
+      L.el.setAttribute("fill", L.color);
+      setTimeout(function () { tick(L); }, 1400 + Math.random() * 2600);
+    }
+    letters.forEach(function (L) {
+      setTimeout(function () { tick(L); }, Math.random() * 2200);
+    });
+  }
+})();
