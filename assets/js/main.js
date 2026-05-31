@@ -244,10 +244,10 @@
     function tick(L) {
       L.color = pick(L);
       L.el.setAttribute("fill", L.color);
-      setTimeout(function () { tick(L); }, 1400 + Math.random() * 2600);
+      setTimeout(function () { tick(L); }, 2500 + Math.random() * 3500); // calm: ~2.5–6s
     }
     letters.forEach(function (L) {
-      setTimeout(function () { tick(L); }, Math.random() * 2200);
+      setTimeout(function () { tick(L); }, Math.random() * 3500);
     });
   }
 })();
