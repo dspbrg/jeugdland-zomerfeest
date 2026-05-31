@@ -79,35 +79,6 @@ img { display: block; max-width: 100%; }
 
 section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 
-/* ---------- top bar (takeover → jeugdlandhaarlem.nl) ---------- */
-.topbar {
-  position: relative;
-  z-index: 3; /* always above the hero diamonds */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  background: var(--royal);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: clamp(13px, 3.9vw, 16px);
-  padding: 14px 18px;
-  transition: background .15s ease;
-}
-.topbar:active { background: color-mix(in srgb, var(--royal) 85%, black); }
-.topcta__arrow {
-  font-size: 1.15em;
-  line-height: 1;
-  animation: nudge-up 1.6s ease-in-out infinite;
-}
-@keyframes nudge-up {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-3px); }
-}
-
 /* ---------- shared bits ---------- */
 .section-eyebrow {
   font-family: var(--font-body);
@@ -141,7 +112,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
                  stay below the line-up layer (z-index:1) → behind its text */
   text-align: center;
   background: transparent; /* lets the shell's color-fade show through */
-  padding-top: clamp(32px, 9vw, 56px);
+  padding-top: clamp(16px, 4vw, 28px);
   /* note: no overflow:hidden — lets the lowest diamonds drift across the
      boundary into the empty top of the line-up section (shell still clips
      horizontally, so nothing spills sideways out of the canvas) */
@@ -230,8 +201,8 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 
 .hero__logo {
-  width: min(72%, 300px);
-  margin: 0 auto clamp(14px, 4vw, 22px);
+  width: min(66%, 270px);
+  margin: 0 auto clamp(8px, 2.5vw, 14px);
 }
 .hero__tagline {
   font-weight: 700;
@@ -240,16 +211,16 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   letter-spacing: .01em;
   font-size: clamp(15px, 4.6vw, 19px);
   color: var(--ink);
-  margin: 0 auto clamp(18px, 6vw, 30px);
+  margin: 0 auto clamp(10px, 3.5vw, 18px);
   max-width: 34ch;
 }
 
 .hero__title {
   position: relative;
-  margin-bottom: clamp(18px, 6vw, 28px);
+  margin-bottom: clamp(10px, 3.5vw, 18px);
   will-change: translate;
 }
-.hero__zomerfeest { width: 100%; }
+.hero__zomerfeest { width: 100%; height: auto; } /* scale proportionally */
 /* badge is locked to the title (moves with ZOMERFEEST on scroll) and dips a
    touch onto the artwork at its bottom edge */
 .hero__badge {
@@ -353,7 +324,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 /* original poster word-art (SVG) for the artist names — like Figma 11:95 */
 .artist-art { margin: 0 auto; }
 .artist-art--slodde     { width: min(88%, 380px); }
-.artist-art--goochelaar { width: min(62%, 268px); }   /* stacked two lines, narrower */
+.artist-art--goochelaar { width: min(49%, 208px); }   /* smaller — SLodDe is the headliner */
 
 /* =========================================================
    ACTIVITEITEN
@@ -479,25 +450,19 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   opacity: .65;
   margin: 0 0 14px;
 }
+/* small, subtle coloured text link */
 .foot__site {
   display: inline-block;
-  margin: 0 0 18px;
-  background: var(--royal);
-  color: #fff;
+  margin: 0 0 16px;
+  color: var(--royal);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .03em;
+  font-size: 14px;
+  letter-spacing: .01em;
   text-decoration: none;
-  font-size: clamp(14px, 4vw, 16px);
-  padding: 12px 24px;
-  border-radius: 999px;
-  box-shadow: 0 5px 0 color-mix(in srgb, var(--royal) 70%, black);
-  transition: transform .1s ease, box-shadow .1s ease;
 }
-.foot__site:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--royal) 70%, black);
-}
+.foot__site span { transition: transform .15s ease; display: inline-block; }
+.foot__site:hover { text-decoration: underline; }
+.foot__site:hover span { transform: translateX(3px); }
 .foot__top {
   display: block;
   color: var(--red);
@@ -519,6 +484,6 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hd, .hero__badge, .shell, body, .topcta__arrow { animation: none; }
+  .hd, .hero__badge, .shell, body { animation: none; }
   html { scroll-behavior: auto; }
 }
