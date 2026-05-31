@@ -450,6 +450,14 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   opacity: .65;
   margin: 0 0 14px;
 }
+.foot__pitch {
+  max-width: 32ch;
+  margin: 0 auto 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--purple) 72%, transparent);
+}
 /* small, subtle coloured text link */
 .foot__site {
   display: inline-block;
