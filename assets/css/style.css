@@ -229,6 +229,7 @@ section, header, footer { padding: clamp(40px, 11vw, 64px) var(--pad); }
   right: 10px;
   width: 32%;
   max-width: 136px;
+  height: auto; /* keep the bubble's real proportions (was stretched tall) */
   rotate: 6deg;
   transform-origin: bottom center;
   filter: drop-shadow(0 6px 10px rgba(35, 31, 32, .25));
