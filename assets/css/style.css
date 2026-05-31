@@ -71,7 +71,6 @@ img { display: block; max-width: 100%; }
   max-width: var(--shell-max);
   margin-inline: auto;
   background-color: var(--cream); /* fallback */
-  box-shadow: 0 0 60px rgba(49, 31, 92, .12);
   min-height: 100vh;
   /* clip sideways (diamonds bleed past the edge → no horizontal scroll)
      while still allowing them to drift vertically across section borders */
@@ -517,10 +516,8 @@ section, header, footer { padding: var(--space-6) var(--pad); }
 /* =========================================================
    Responsive niceties
    ========================================================= */
-@media (min-width: 481px) {
-  .shell { margin-block: 24px; border-radius: 28px; overflow: hidden; }
-  body { background: var(--purple); animation: none; }
-}
+/* desktop: no phone-frame — the centered column blends into the page,
+   background keeps fading edge-to-edge (no rounded card, shadow or margin) */
 
 @media (prefers-reduced-motion: reduce) {
   .hd, .hero__badge, .shell, body { animation: none; }
