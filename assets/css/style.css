@@ -512,6 +512,19 @@ section, header, footer { padding: var(--space-6) var(--pad); }
   letter-spacing: .1em;
   text-decoration: none;
 }
+/* subtle maker's credit, all the way at the bottom */
+.foot__credit {
+  margin: var(--space-4) 0 0;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: color-mix(in srgb, var(--purple) 42%, transparent);
+}
+.foot__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.foot__credit a:hover { color: var(--purple); }
 
 /* =========================================================
    Responsive niceties
