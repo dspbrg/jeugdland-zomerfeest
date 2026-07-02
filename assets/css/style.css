@@ -503,6 +503,14 @@ section, header, footer { padding: var(--space-6) var(--pad); }
   transform: translateY(3px);
   box-shadow: 0 2px 0 color-mix(in srgb, var(--royal) 70%, black);
 }
+/* green button → Huisje huren */
+.foot__site--rent {
+  background: var(--green);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--green) 70%, black);
+}
+.foot__site--rent:active {
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--green) 70%, black);
+}
 .foot__top {
   display: block;
   color: var(--red);
